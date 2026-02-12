@@ -21,7 +21,36 @@
             min-height: 100vh;
             padding: 20px;
             padding-bottom: 40px;
+            transition: background 0.3s;
         }
+
+        body.theme-ocean {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body.theme-sunset {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+        }
+
+        body.theme-forest {
+            background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
+        }
+
+        body.theme-candy {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        body.theme-cosmic {
+            background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
+        }
+
+        body.theme-peach {
+            background: linear-gradient(135deg, #fab1a0 0%, #ff7675 100%);
+        }
+
+        body.font-small { font-size: 14px; }
+        body.font-medium { font-size: 16px; }
+        body.font-large { font-size: 18px; }
 
         .container {
             max-width: 600px;
@@ -37,6 +66,32 @@
             color: white;
             padding: 30px;
             text-align: center;
+            position: relative;
+        }
+
+        .settings-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .settings-icon:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .welcome-name {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            opacity: 0.9;
+            min-height: 1.5em;
         }
 
         .header h1 {
@@ -52,23 +107,126 @@
             font-size: 1.1em;
         }
 
-        .install-banner {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            padding: 15px;
-            text-align: center;
+        .settings-modal {
             display: none;
-            border-bottom: 3px solid #f5576c;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        .install-banner button {
+        .settings-modal.active {
+            display: flex;
+        }
+
+        .settings-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .settings-content h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .setting-group {
+            margin-bottom: 25px;
+        }
+
+        .setting-group label {
+            display: block;
+            color: #555;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .setting-group input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .theme-option {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .theme-option:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-option.active {
+            border-color: #333;
+            transform: scale(1.05);
+        }
+
+        .theme-ocean { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .theme-sunset { background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%); }
+        .theme-forest { background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%); }
+        .theme-candy { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .theme-cosmic { background: linear-gradient(135deg, #4834d4 0%, #686de0 100%); }
+        .theme-peach { background: linear-gradient(135deg, #fab1a0 0%, #ff7675 100%); }
+
+        .font-size-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .font-size-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .font-size-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .settings-close {
             background: #667eea;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 10px;
             cursor: pointer;
-            margin-top: 10px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
         }
 
         .content {
@@ -93,14 +251,6 @@
             font-size: 1.3em;
         }
 
-        .section h2::before {
-            content: '☀️ ';
-        }
-
-        .section.evening h2::before {
-            content: '🌙 ';
-        }
-
         .prompt {
             margin-bottom: 20px;
         }
@@ -119,7 +269,7 @@
             border: 2px solid #ddd;
             border-radius: 10px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial', sans-serif;
-            font-size: 14px;
+            font-size: 1em;
             resize: vertical;
             min-height: 60px;
             transition: border-color 0.3s;
@@ -162,14 +312,7 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
             margin-bottom: 10px;
-        }
-
-        .photo-upload-btn:hover {
-            opacity: 0.9;
         }
 
         #photoInput {
@@ -208,15 +351,7 @@
             height: 24px;
             cursor: pointer;
             font-size: 16px;
-            line-height: 1;
             color: #f5576c;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .photo-remove:hover {
-            background: white;
         }
 
         .buttons {
@@ -235,12 +370,11 @@
             font-size: 1em;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s;
         }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        button:active {
+            transform: scale(0.95);
         }
 
         .save-btn {
@@ -294,11 +428,6 @@
             object-fit: cover;
             border-radius: 6px;
             cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .entry-photos img:hover {
-            transform: scale(1.05);
         }
 
         .photo-modal {
@@ -336,20 +465,6 @@
             height: 40px;
             font-size: 24px;
             cursor: pointer;
-            color: #333;
-        }
-
-        .offline-indicator {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #4caf50;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            display: none;
         }
 
         @media (max-width: 600px) {
@@ -372,28 +487,62 @@
             button {
                 width: 100%;
             }
+
+            .theme-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
-<body>
-    <div class="install-banner" id="installBanner">
-        <strong>📱 Install this app!</strong>
-        <p style="margin-top: 5px;">Add to your home screen for the best experience</p>
-        <button onclick="installApp()">Install Now</button>
-        <button onclick="dismissInstallBanner()" style="background: transparent; color: #333; text-decoration: underline;">Maybe Later</button>
+<body class="theme-ocean font-medium">
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-content">
+            <h2>⚙️ Personalize Your Journal</h2>
+            
+            <div class="setting-group">
+                <label>Your Name</label>
+                <input type="text" id="userName" placeholder="Enter your name" maxlength="20">
+                <div class="emoji-hint">This will appear at the top of your journal</div>
+            </div>
+
+            <div class="setting-group">
+                <label>Background Theme</label>
+                <div class="theme-grid">
+                    <div class="theme-option theme-ocean active" data-theme="ocean">Ocean<br>Waves</div>
+                    <div class="theme-option theme-sunset" data-theme="sunset">Sunset<br>Sky</div>
+                    <div class="theme-option theme-forest" data-theme="forest">Forest<br>Green</div>
+                    <div class="theme-option theme-candy" data-theme="candy">Candy<br>Pop</div>
+                    <div class="theme-option theme-cosmic" data-theme="cosmic">Cosmic<br>Purple</div>
+                    <div class="theme-option theme-peach" data-theme="peach">Peachy<br>Keen</div>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label>Text Size</label>
+                <div class="font-size-options">
+                    <button type="button" class="font-size-btn" data-size="small">Small</button>
+                    <button type="button" class="font-size-btn active" data-size="medium">Medium</button>
+                    <button type="button" class="font-size-btn" data-size="large">Large</button>
+                </div>
+            </div>
+
+            <button type="button" class="settings-close" id="closeSettingsBtn">Save & Close</button>
+        </div>
     </div>
 
     <div class="container">
         <div class="header">
+            <button type="button" class="settings-icon" id="openSettingsBtn">⚙️</button>
+            <div class="welcome-name" id="welcomeName"></div>
             <h1>✨ My 5-Minute Journal ✨</h1>
-            <div class="date-display" id="dateDisplay">Loading...</div>
+            <div class="date-display" id="dateDisplay"></div>
         </div>
 
         <div class="content">
-            <div class="quote" id="dailyQuote">Loading quote...</div>
+            <div class="quote" id="dailyQuote"></div>
 
             <div class="section morning">
-                <h2>Morning Time</h2>
+                <h2>☀️ Morning Time</h2>
                 
                 <div class="prompt">
                     <label>I am grateful for...</label>
@@ -415,7 +564,7 @@
             </div>
 
             <div class="section evening">
-                <h2>Evening Time</h2>
+                <h2>🌙 Evening Time</h2>
                 
                 <div class="prompt">
                     <label>Amazing things that happened today:</label>
@@ -433,179 +582,40 @@
                 <div class="photo-section">
                     <h3>📸 Today's Photos (Optional)</h3>
                     <input type="file" id="photoInput" accept="image/*" multiple>
-                    <button class="photo-upload-btn" onclick="document.getElementById('photoInput').click()">
-                        📷 Add Photos
-                    </button>
+                    <button type="button" class="photo-upload-btn" id="photoUploadBtn">📷 Add Photos</button>
                     <div class="emoji-hint">You can add multiple photos to capture your day!</div>
                     <div class="photo-preview-container" id="photoPreview"></div>
                 </div>
             </div>
 
             <div class="buttons">
-                <button class="save-btn" onclick="saveEntry()">💾 Save My Entry</button>
-                <button class="clear-btn" onclick="clearForm()">🔄 Start Fresh</button>
-                <button class="clear-btn" onclick="viewPastEntries()">📖 View Past Days</button>
+                <button type="button" class="save-btn" id="saveBtn">💾 Save My Entry</button>
+                <button type="button" class="clear-btn" id="clearBtn">🔄 Start Fresh</button>
+                <button type="button" class="clear-btn" id="viewPastBtn">📖 View Past Days</button>
             </div>
 
             <div id="pastEntries" style="display: none;">
                 <h3 style="color: #333; margin: 20px 0 15px 0;">📅 Past Journal Entries</h3>
                 <div id="entriesList"></div>
-                <button class="clear-btn" onclick="closePastEntries()" style="margin-top: 15px; width: 100%;">Close</button>
+                <button type="button" class="clear-btn" id="closePastBtn" style="margin-top: 15px; width: 100%;">Close</button>
             </div>
         </div>
     </div>
 
     <div class="photo-modal" id="photoModal">
-        <button class="photo-modal-close" onclick="closePhotoModal()">×</button>
+        <button type="button" class="photo-modal-close" id="closePhotoModalBtn">×</button>
         <img id="modalPhoto" src="" alt="Full size photo">
     </div>
 
-    <div class="offline-indicator" id="offlineIndicator">
-        ✅ Works Offline
-    </div>
-
     <script>
-        console.log('Journal script starting...');
-
+        // Global variables
         let currentPhotos = [];
+        let settings = {
+            name: '',
+            theme: 'ocean',
+            fontSize: 'medium'
+        };
 
-        // PWA Installation
-        let deferredPrompt;
-        
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('installBanner').style.display = 'block';
-        });
-
-        function installApp() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    deferredPrompt = null;
-                    document.getElementById('installBanner').style.display = 'none';
-                });
-            }
-        }
-
-        function dismissInstallBanner() {
-            document.getElementById('installBanner').style.display = 'none';
-        }
-
-        // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            const swCode = `
-                const CACHE_NAME = 'journal-v2';
-                
-                self.addEventListener('install', (event) => {
-                    event.waitUntil(
-                        caches.open(CACHE_NAME).then((cache) => {
-                            return cache.addAll(['./', 'index.html']);
-                        })
-                    );
-                });
-
-                self.addEventListener('fetch', (event) => {
-                    event.respondWith(
-                        caches.match(event.request).then((response) => {
-                            return response || fetch(event.request);
-                        })
-                    );
-                });
-            `;
-
-            const blob = new Blob([swCode], { type: 'application/javascript' });
-            const swUrl = URL.createObjectURL(blob);
-
-            navigator.serviceWorker.register(swUrl).then(() => {
-                console.log('Service worker registered');
-                document.getElementById('offlineIndicator').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('offlineIndicator').style.display = 'none';
-                }, 3000);
-            }).catch((err) => {
-                console.log('Service worker registration failed:', err);
-            });
-        }
-
-        // Photo handling
-        document.getElementById('photoInput').addEventListener('change', async (e) => {
-            const files = Array.from(e.target.files);
-            
-            for (const file of files) {
-                if (file.type.startsWith('image/')) {
-                    const compressed = await compressImage(file);
-                    currentPhotos.push(compressed);
-                }
-            }
-            
-            displayPhotoPreview();
-            e.target.value = '';
-        });
-
-        async function compressImage(file) {
-            return new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        let width = img.width;
-                        let height = img.height;
-                        
-                        const maxSize = 800;
-                        if (width > height && width > maxSize) {
-                            height = (height * maxSize) / width;
-                            width = maxSize;
-                        } else if (height > maxSize) {
-                            width = (width * maxSize) / height;
-                            height = maxSize;
-                        }
-                        
-                        canvas.width = width;
-                        canvas.height = height;
-                        
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-                        
-                        resolve(canvas.toDataURL('image/jpeg', 0.7));
-                    };
-                    img.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function displayPhotoPreview() {
-            const container = document.getElementById('photoPreview');
-            container.innerHTML = '';
-            
-            currentPhotos.forEach((photo, index) => {
-                const div = document.createElement('div');
-                div.className = 'photo-preview';
-                div.innerHTML = `
-                    <img src="${photo}" alt="Photo ${index + 1}">
-                    <button class="photo-remove" onclick="removePhoto(${index})">×</button>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        function removePhoto(index) {
-            currentPhotos.splice(index, 1);
-            displayPhotoPreview();
-        }
-
-        function openPhotoModal(photoSrc) {
-            document.getElementById('modalPhoto').src = photoSrc;
-            document.getElementById('photoModal').classList.add('active');
-        }
-
-        function closePhotoModal() {
-            document.getElementById('photoModal').classList.remove('active');
-        }
-
-        // Quotes Array
         const quotes = [
             "Every day may not be good, but there's something good in every day! 🌈",
             "Believe in yourself and you can do amazing things! ⭐",
@@ -627,4 +637,11 @@
             "You are enough, just as you are! 💝",
             "Great things never came from comfort zones! 🏔️",
             "Kindness is free - sprinkle it everywhere! ✨",
-            "You are one of a
+            "You are one of a kind and that's your superpower! 🦸",
+            "Every day is a fresh start! 🌅",
+            "Be yourself, everyone else is taken! 🎭",
+            "You can't use up creativity - the more you use, the more you have! 🎨",
+            "Believe you can and you're halfway there! 🌟",
+            "Do small things with great love! ❤️",
+            "You are smart, you are kind, you are important! 👑",
+         
