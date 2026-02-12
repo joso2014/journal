@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="My Journal">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIk15IDUtTWludXRlIEpvdXJuYWwiLAogICJzaG9ydF9uYW1lIjogIk15IEpvdXJuYWwiLAogICJkZXNjcmlwdGlvbiI6ICJBIGRhaWx5IGdyYXRpdHVkZSBqb3VybmFsIGZvciBraWRzIiwKICAic3RhcnRfdXJsIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjNjY3ZWVhIiwKICAidGhlbWVfY29sb3IiOiAiIzY2N2VlYSIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ3JlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIGZpbGw9JyUyMzY2N2VlYScvJTNFJTNDdGV4dCB4PSc1MCUyNScgeT0nNTAlMjUnIGZvbnQtc2l6ZT0nNTAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGR5PScuM2VtJyUzRSVGMCU5RiU5MyU5RCUzQy90ZXh0JTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0KICBdCn0=">
+    <title>My 5-Minute Journal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .date-display {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .install-banner {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 15px;
+            text-align: center;
+            display: none;
+            border-bottom: 3px solid #f5576c;
+        }
+
+        .install-banner button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #f5576c;
+        }
+
+        .section.evening {
+            border-left-color: #667eea;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .section h2::before {
+            content: '☀️ ';
+        }
+
+        .section.evening h2::before {
+            content: '🌙 ';
+        }
+
+        .prompt {
+            margin-bottom: 20px;
+        }
+
+        .prompt label {
+            display: block;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .prompt textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial', sans-serif;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 60px;
+            transition: border-color 0.3s;
+        }
+
+        .prompt textarea:focus {
+            outline: none;
+            border-color: #f5576c;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-style: italic;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            min-width: 120px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .clear-btn {
+            background: #e0e0e0;
+            color: #555;
+        }
+
+        .emoji-hint {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        #pastEntries {
+            margin-top: 30px;
+        }
+
+        .entry-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .entry-item h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .entry-item p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .offline-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="install-banner" id="installBanner">
+        <strong>📱 Install this app!</strong>
+        <p style="margin-top: 5px;">Add to your home screen for the best experience</p>
+        <button onclick="installApp()">Install Now</button>
+        <button onclick="dismissInstallBanner()" style="background: transparent; color: #333; text-decoration: underline;">Maybe Later</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>✨ My 5-Minute Journal ✨</h1>
+            <div class="date-display" id="dateDisplay"></div>
+        </div>
+
+        <div class="content">
+            <div class="quote" id="dailyQuote"></div>
+
+            <div class="section morning">
+                <h2>Morning Time</h2>
+                
+                <div class="prompt">
+                    <label>I am grateful for...</label>
+                    <textarea id="grateful1" placeholder="Something that makes you happy"></textarea>
+                    <textarea id="grateful2" placeholder="Someone you appreciate"></textarea>
+                    <textarea id="grateful3" placeholder="Something fun or cool"></textarea>
+                </div>
+
+                <div class="prompt">
+                    <label>What would make today great?</label>
+                    <textarea id="makeGreat" placeholder="What are you looking forward to today?"></textarea>
+                </div>
+
+                <div class="prompt">
+                    <label>Today's positive thought:</label>
+                    <textarea id="affirmation" placeholder="I am... / I can... / I will..."></textarea>
+                    <div class="emoji-hint">💪 Example: "I am brave and kind" or "I can do hard things!"</div>
+                </div>
+            </div>
+
+            <div class="section evening">
+                <h2>Evening Time</h2>
+                
+                <div class="prompt">
+                    <label>Amazing things that happened today:</label>
+                    <textarea id="amazing1" placeholder="Something awesome that happened"></textarea>
+                    <textarea id="amazing2" placeholder="Another cool thing"></textarea>
+                    <textarea id="amazing3" placeholder="One more great moment"></textarea>
+                </div>
+
+                <div class="prompt">
+                    <label>How could I have made today even better?</label>
+                    <textarea id="better" placeholder="What could you try tomorrow?"></textarea>
+                    <div class="emoji-hint">🌟 It's okay if today wasn't perfect - every day is a chance to learn!</div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="save-btn" onclick="saveEntry()">💾 Save My Entry</button>
+                <button class="clear-btn" onclick="clearForm()">🔄 Start Fresh</button>
+                <button class="clear-btn" onclick="viewPastEntries()">📖 View Past Days</button>
+            </div>
+
+            <div id="pastEntries" style="display: none;">
+                <h3 style="color: #333; margin: 20px 0 15px 0;">📅 Past Journal Entries</h3>
+                <div id="entriesList"></div>
+                <button class="clear-btn" onclick="closePastEntries()" style="margin-top: 15px; width: 100%;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="offline-indicator" id="offlineIndicator">
+        ✅ Works Offline
+    </div>
+
+    <script>
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installBanner').style.display = 'block';
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('App installed');
+                    }
+                    deferredPrompt = null;
+                    document.getElementById('installBanner').style.display = 'none';
+                });
+            }
+        }
+
+        function dismissInstallBanner() {
+            document.getElementById('installBanner').style.display = 'none';
+        }
+
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                const CACHE_NAME = 'journal-v1';
+                
+                self.addEventListener('install', (event) => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME).then((cache) => {
+                            return cache.addAll(['./', 'index.html']);
+                        })
+                    );
+                });
+
+                self.addEventListener('fetch', (event) => {
+                    event.respondWith(
+                        caches.match(event.request).then((response) => {
+                            return response || fetch(event.request);
+                        })
+                    );
+                });
+            `;
+
+            const blob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(blob);
+
+            navigator.serviceWorker.register(swUrl).then(() => {
+                document.getElementById('offlineIndicator').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('offlineIndicator').style.display = 'none';
+                }, 3000);
+            });
+        }
+
+        const quotes = [
+            "Every day may not be good, but there's something good in every day! 🌈",
+            "Believe in yourself and you can do amazing things! ⭐",
+            "Be kind, be brave, be YOU! 💖",
+            "The only way to do great work is to love what you do! 🎨",
+            "You are braver than you believe and stronger than you seem! 💪",
+            "Dream big and dare to fail - that's how we learn! 🚀",
+            "In a world where you can be anything, be kind! 🌟",
+            "Every accomplishment starts with the decision to try! 🎯",
+            "You are capable of amazing things! ✨",
+            "Mistakes are proof that you are trying! 🌱",
+            "Be silly, be honest, be kind! 😊",
+            "The future belongs to those who believe in their dreams! 🦋",
+            "You make the world a better place just by being in it! 🌍",
+            "Small steps every day lead to big changes! 👣",
+            "Your attitude determines your direction! 🧭",
+            "Be the reason someone smiles today! 😄",
+            "Life is tough, but so are you! 🦁",
+            "You are enough, just as you are! 💝",
+            "Great things never came from comfort zones! 🏔️",
+            "Kindness is free - sprinkle it everywhere! ✨",
+            "You are one of a kind and that's your superpower! 🦸",
+            "Every day is a fresh start! 🌅",
+            "Be yourself, everyone else is taken! 🎭",
+            "You can't use up creativity - the more you use, the more you have! 🎨",
+            "Believe you can and you're halfway there! 🌟",
+            "Do small things with great love! ❤️",
+            "You are smart, you are kind, you are important! 👑",
+            "The best time for new beginnings is NOW! ⏰",
+            "Your smile can change someone's day! 😊",
+            "Keep going, you're doing great! 🌈"
+        ];
+
+        function getDailyQuote() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+            return quotes[dayOfYear % quotes.length];
+        }
+
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('dateDisplay').textContent = now.toLocaleDateString('en-US', options);
+            document.getElementById('dailyQuote').textContent = getDailyQuote();
+        }
+
+        function saveEntry() {
+            const today = new Date().toDateString();
+            
+            const entry = {
+                date: today,
+                timestamp: new Date().toISOString(),
+                grateful: [
+                    document.getElementById('grateful1').value,
+                    document.getElementById('grateful2').value,
+                    document.getElementById('grateful3').value
+                ],
+                makeGreat: document.getElementById('makeGreat').value,
+                affirmation: document.getElementById('affirmation').value,
+                amazing: [
+                    document.getElementById('amazing1').value,
+                    document.getElementById('amazing2').value,
+                    document.getElementById('amazing3').value
+                ],
+                better: document.getElementById('better').value
+            };
+
+            let entries = JSON.parse(localStorage.getItem('journalEntries') || '{}');
+            entries[today] = entry;
+            localStorage.setItem('journalEntries', JSON.stringify(entries));
+
+            alert('🎉 Great job! Your journal entry for today has been saved! Keep up the awesome work!');
+        }
+
+        function clearForm() {
+            if (confirm('Are you sure you want to clear everything and start fresh?')) {
+                document.querySelectorAll('textarea').forEach(textarea => textarea.value = '');
+            }
+        }
+
+        function loadToday() {
+            const today = new Date().toDateString();
+            const entries = JSON.parse(localStorage.getItem('journalEntries') || '{}');
+            const todayEntry = entries[today];
+
+            if (todayEntry) {
+                document.getElementById('grateful1').value = todayEntry.grateful[0] || '';
+                document.getElementById('grateful2').value = todayEntry.grateful[1] || '';
+                document.getElementById('grateful3').value = todayEntry.grateful[2] || '';
+                document.getElementById('makeGreat').value = todayEntry.makeGreat || '';
+                document.getElementById('affirmation').value = todayEntry.affirmation || '';
+                document.getElementById('amazing1').value = todayEntry.amazing[0] || '';
+                document.getElementById('amazing2').value = todayEntry.amazing[1] || '';
+                document.getElementById('amazing3').value = todayEntry.amazing[2] || '';
+                document.getElementById('better').value = todayEntry.better || '';
+            }
+        }
+
+        function viewPastEntries() {
+            const entries = JSON.parse(localStorage.getItem('journalEntries') || '{}');
+            const entriesList = document.getElementById('entriesList');
+            entriesList.innerHTML = '';
+
+            const dates = Object.keys(entries).sort((a, b) => new Date(b) - new Date(a));
+
+            if (dates.length === 0) {
+                entriesList.innerHTML = '<p style="color: #888; text-align: center; padding: 20px;">No past entries yet. Start journaling today! 📝</p>';
+            } else {
+                dates.forEach(date => {
+                    const entry = entries[date];
+                    const entryDiv = document.createElement('div');
+                    entryDiv.className = 'entry-item';
+                    
+                    entryDiv.innerHTML = `
+                        <h4>${date}</h4>
+                        <p><strong>Grateful for:</strong> ${entry.grateful.filter(g => g).join(', ') || 'Not recorded'}</p>
+                        <p><strong>Amazing things:</strong> ${entry.amazing.filter(a => a).join(', ') || 'Not recorded'}</p>
+                    `;
+                    
+                    entriesList.appendChild(entryDiv);
+                });
+            }
+
+            document.getElementById('pastEntries').style.display = 'block';
+            document.getElementById('pastEntries').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closePastEntries() {
+            document.getElementById('pastEntries').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        updateDate();
+        loadToday();
+
+        setInterval(() => {
+            const hasContent = Array.from(document.querySelectorAll('textarea')).some(t => t.value.trim());
+            if (hasContent) {
+                const today = new Date().toDateString();
+                const drafts = JSON.parse(localStorage.getItem('journalDrafts') || '{}');
+                drafts[today] = {
+                    grateful1: document.getElementById('grateful1').value,
+                    grateful2: document.getElementById('grateful2').value,
+                    grateful3: document.getElementById('grateful3').value,
+                    makeGreat: document.getElementById('makeGreat').value,
+                    affirmation: document.getElementById('affirmation').value,
+                    amazing1: document.getElementById('amazing1').value,
+                    amazing2: document.getElementById('amazing2').value,
+                    amazing3: document.getElementById('amazing3').value,
+                    better: docume
