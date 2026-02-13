@@ -6,20 +6,17 @@
     <title>My 5-Minute Journal</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
         body.theme-sunset { background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%); }
         body.theme-forest { background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%); }
         body.theme-candy { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
         body.font-small { font-size: 14px; }
         body.font-large { font-size: 18px; }
-        
         .container {
             max-width: 600px;
             margin: 0 auto;
@@ -27,7 +24,6 @@
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
-        
         .header {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
@@ -36,7 +32,6 @@
             position: relative;
             border-radius: 20px 20px 0 0;
         }
-        
         .settings-btn {
             position: absolute;
             top: 20px;
@@ -50,13 +45,10 @@
             cursor: pointer;
             font-size: 20px;
         }
-        
-        .welcome { font-size: 1.1em; margin-bottom: 5px; }
+        .welcome { font-size: 1.1em; margin-bottom: 5px; min-height: 1.5em; }
         .header h1 { font-size: 1.8em; margin: 10px 0; }
         .date { background: rgba(255,255,255,0.2); padding: 10px; border-radius: 10px; margin-top: 10px; }
-        
         .content { padding: 30px; }
-        
         .quote {
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             padding: 20px;
@@ -65,7 +57,6 @@
             font-style: italic;
             margin-bottom: 20px;
         }
-        
         .section {
             background: #f8f9fa;
             padding: 20px;
@@ -73,9 +64,7 @@
             margin-bottom: 20px;
             border-left: 5px solid #f5576c;
         }
-        
         .section h2 { color: #333; margin-bottom: 15px; }
-        
         .prompt { margin-bottom: 15px; }
         .prompt label { display: block; color: #555; font-weight: bold; margin-bottom: 5px; }
         .prompt textarea {
@@ -87,9 +76,7 @@
             min-height: 50px;
             font-family: inherit;
         }
-        
         .hint { font-size: 0.85em; color: #888; margin-top: 5px; }
-        
         .photo-section {
             background: #fff;
             border: 2px dashed #ddd;
@@ -97,7 +84,6 @@
             border-radius: 10px;
             margin-top: 15px;
         }
-        
         .photo-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -107,23 +93,19 @@
             cursor: pointer;
             font-weight: bold;
         }
-        
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 10px;
             margin-top: 10px;
         }
-        
         .photo-item {
             position: relative;
             aspect-ratio: 1;
             border-radius: 8px;
             overflow: hidden;
         }
-        
         .photo-item img { width: 100%; height: 100%; object-fit: cover; }
-        
         .photo-remove {
             position: absolute;
             top: 5px;
@@ -136,14 +118,12 @@
             cursor: pointer;
             color: #f5576c;
         }
-        
         .buttons {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
             margin-top: 20px;
         }
-        
         .btn {
             flex: 1;
             min-width: 120px;
@@ -154,10 +134,8 @@
             cursor: pointer;
             font-size: 1em;
         }
-        
         .btn-save { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
         .btn-secondary { background: #e0e0e0; color: #555; }
-        
         .modal {
             display: none;
             position: fixed;
@@ -170,9 +148,7 @@
             padding: 20px;
             overflow-y: auto;
         }
-        
         .modal.show { display: block; }
-        
         .modal-content {
             background: white;
             border-radius: 20px;
@@ -180,19 +156,15 @@
             max-width: 500px;
             margin: 50px auto;
         }
-        
         .modal h2 { margin-bottom: 20px; }
-        
         .setting { margin-bottom: 20px; }
         .setting label { display: block; font-weight: bold; margin-bottom: 10px; }
         .setting input { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 1em; }
-        
         .theme-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
-        
         .theme-box {
             padding: 20px;
             border-radius: 10px;
@@ -201,13 +173,11 @@
             cursor: pointer;
             border: 3px solid transparent;
         }
-        
         .theme-box.active { border-color: #333; }
         .theme-ocean { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         .theme-sunset { background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%); }
         .theme-forest { background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%); }
         .theme-candy { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        
         .size-btns { display: flex; gap: 10px; }
         .size-btn {
             flex: 1;
@@ -218,7 +188,6 @@
             cursor: pointer;
         }
         .size-btn.active { background: #667eea; color: white; border-color: #667eea; }
-        
         .entry-item {
             background: #f8f9fa;
             padding: 15px;
@@ -226,21 +195,18 @@
             margin-bottom: 15px;
             border-left: 4px solid #667eea;
         }
-        
         .entry-photos {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
             gap: 8px;
             margin-top: 10px;
         }
-        
         .entry-photos img {
             width: 100%;
             aspect-ratio: 1;
             object-fit: cover;
             border-radius: 6px;
         }
-        
         @media (max-width: 600px) {
             body { padding: 10px; }
             .content { padding: 20px; }
@@ -257,10 +223,8 @@
             <h1>✨ My 5-Minute Journal ✨</h1>
             <div class="date" id="date"></div>
         </div>
-        
         <div class="content">
             <div class="quote" id="quote"></div>
-            
             <div class="section">
                 <h2>☀️ Morning Time</h2>
                 <div class="prompt">
@@ -279,7 +243,6 @@
                     <div class="hint">💪 Example: "I am brave and kind"</div>
                 </div>
             </div>
-            
             <div class="section">
                 <h2>🌙 Evening Time</h2>
                 <div class="prompt">
@@ -292,22 +255,19 @@
                     <label>How could I have made today even better?</label>
                     <textarea id="better" placeholder="What could you try tomorrow?"></textarea>
                 </div>
-                
                 <div class="photo-section">
                     <h3>📸 Today's Photos (Optional)</h3>
                     <input type="file" id="photoInput" accept="image/*" multiple style="display:none">
                     <button class="photo-btn" id="addPhotoBtn">📷 Add Photos</button>
-                    <div class="hint">Add multiple photos to capture your day!</div>
+                    <div class="hint">Add multiple photos!</div>
                     <div class="photo-grid" id="photoGrid"></div>
                 </div>
             </div>
-            
             <div class="buttons">
                 <button class="btn btn-save" id="saveBtn">💾 Save My Entry</button>
                 <button class="btn btn-secondary" id="clearBtn">🔄 Start Fresh</button>
                 <button class="btn btn-secondary" id="viewBtn">📖 View Past Days</button>
             </div>
-            
             <div id="past" style="display:none; margin-top:30px;">
                 <h3>📅 Past Journal Entries</h3>
                 <div id="pastList"></div>
@@ -315,7 +275,6 @@
             </div>
         </div>
     </div>
-    
     <div class="modal" id="settingsModal">
         <div class="modal-content">
             <h2>⚙️ Settings</h2>
@@ -343,231 +302,8 @@
             <button class="btn btn-save" id="closeSettingsBtn" style="width:100%;">Save & Close</button>
         </div>
     </div>
-
 <script>
-let photos = [];
-let cfg = { name: '', theme: 'ocean', size: 'medium' };
-
-const quotes = [
-    "Every day may not be good, but there's something good in every day! 🌈",
-    "Believe in yourself and you can do amazing things! ⭐",
-    "Be kind, be brave, be YOU! 💖",
-    "You are braver than you believe and stronger than you seem! 💪",
-    "Dream big and dare to fail - that's how we learn! 🚀",
-    "In a world where you can be anything, be kind! 🌟",
-    "You are capable of amazing things! ✨",
-    "Mistakes are proof that you are trying! 🌱",
-    "Be silly, be honest, be kind! 😊",
-    "You make the world a better place just by being in it! 🌍"
-];
-
-function init() {
-    loadConfig();
-    updateDate();
-    loadToday();
-    
-    document.getElementById('settingsBtn').onclick = () => {
-        document.getElementById('settingsModal').classList.add('show');
-    };
-    
-    document.getElementById('closeSettingsBtn').onclick = () => {
-        document.getElementById('settingsModal').classList.remove('show');
-    };
-    
-    document.getElementById('nameInput').oninput = (e) => {
-        cfg.name = e.target.value;
-        saveConfig();
-        updateWelcome();
-    };
-    
-    document.querySelectorAll('.theme-box').forEach(box => {
-        box.onclick = () => {
-            document.querySelectorAll('.theme-box').forEach(b => b.classList.remove('active'));
-            box.classList.add('active');
-            cfg.theme = box.dataset.theme;
-            saveConfig();
-            applyTheme();
-        };
-    });
-    
-    document.querySelectorAll('.size-btn').forEach(btn => {
-        btn.onclick = () => {
-            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            cfg.size = btn.dataset.size;
-            saveConfig();
-            applySize();
-        };
-    });
-    
-    document.getElementById('addPhotoBtn').onclick = () => {
-        document.getElementById('photoInput').click();
-    };
-    
-    document.getElementById('photoInput').onchange = async (e) => {
-        for (let file of e.target.files) {
-            if (file.type.startsWith('image/')) {
-                const compressed = await compress(file);
-                photos.push(compressed);
-            }
-        }
-        showPhotos();
-        e.target.value = '';
-    };
-    
-    document.getElementById('saveBtn').onclick = save;
-    document.getElementById('clearBtn').onclick = clear;
-    document.getElementById('viewBtn').onclick = viewPast;
-    document.getElementById('closePastBtn').onclick = () => {
-        document.getElementById('past').style.display = 'none';
-    };
-}
-
-function loadConfig() {
-    try {
-        const saved = localStorage.getItem('cfg');
-        if (saved) cfg = JSON.parse(saved);
-    } catch(e) {}
-    applyTheme();
-    applySize();
-    updateWelcome();
-    document.getElementById('nameInput').value = cfg.name;
-    document.querySelectorAll('.theme-box').forEach(b => {
-        b.classList.toggle('active', b.dataset.theme === cfg.theme);
-    });
-    document.querySelectorAll('.size-btn').forEach(b => {
-        b.classList.toggle('active', b.dataset.size === cfg.size);
-    });
-}
-
-function saveConfig() {
-    localStorage.setItem('cfg', JSON.stringify(cfg));
-}
-
-function applyTheme() {
-    document.body.className = `theme-${cfg.theme} font-${cfg.size}`;
-}
-
-function applySize() {
-    document.body.className = `theme-${cfg.theme} font-${cfg.size}`;
-}
-
-function updateWelcome() {
-    document.getElementById('welcome').textContent = cfg.name ? `Welcome back, ${cfg.name}! 👋` : '';
-}
-
-function updateDate() {
-    const now = new Date();
-    const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('date').textContent = now.toLocaleDateString('en-US', opts);
-    const day = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
-    document.getElementById('quote').textContent = quotes[day % quotes.length];
-}
-
-async function compress(file) {
-    return new Promise(resolve => {
-        const reader = new FileReader();
-        reader.onload = e => {
-            const img = new Image();
-            img.onload = () => {
-                const canvas = document.createElement('canvas');
-                let w = img.width, h = img.height;
-                if (w > 800 || h > 800) {
-                    if (w > h) { h = h * 800 / w; w = 800; }
-                    else { w = w * 800 / h; h = 800; }
-                }
-                canvas.width = w;
-                canvas.height = h;
-                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                resolve(canvas.toDataURL('image/jpeg', 0.7));
-            };
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    });
-}
-
-function showPhotos() {
-    const grid = document.getElementById('photoGrid');
-    grid.innerHTML = '';
-    photos.forEach((p, i) => {
-        const div = document.createElement('div');
-        div.className = 'photo-item';
-        div.innerHTML = `<img src="${p}"><button class="photo-remove" onclick="removePhoto(${i})">×</button>`;
-        grid.appendChild(div);
-    });
-}
-
-function removePhoto(i) {
-    photos.splice(i, 1);
-    showPhotos();
-}
-
-function save() {
-    const today = new Date().toDateString();
-    const entry = {
-        date: today,
-        g: [
-            document.getElementById('g1').value,
-            document.getElementById('g2').value,
-            document.getElementById('g3').value
-        ],
-        great: document.getElementById('great').value,
-        affirm: document.getElementById('affirm').value,
-        a: [
-            document.getElementById('a1').value,
-            document.getElementById('a2').value,
-            document.getElementById('a3').value
-        ],
-        better: document.getElementById('better').value,
-        photos: photos
-    };
-    
-    try {
-        let entries = JSON.parse(localStorage.getItem('entries') || '{}');
-        entries[today] = entry;
-        localStorage.setItem('entries', JSON.stringify(entries));
-        alert('🎉 Great job! Your entry has been saved!');
-    } catch(e) {
-        alert('Error saving. Please try again.');
-    }
-}
-
-function clear() {
-    if (confirm('Clear everything and start fresh?')) {
-        document.querySelectorAll('textarea').forEach(t => t.value = '');
-        photos = [];
-        showPhotos();
-    }
-}
-
-function loadToday() {
-    const today = new Date().toDateString();
-    try {
-        const entries = JSON.parse(localStorage.getItem('entries') || '{}');
-        const entry = entries[today];
-        if (entry) {
-            document.getElementById('g1').value = entry.g[0] || '';
-            document.getElementById('g2').value = entry.g[1] || '';
-            document.getElementById('g3').value = entry.g[2] || '';
-            document.getElementById('great').value = entry.great || '';
-            document.getElementById('affirm').value = entry.affirm || '';
-            document.getElementById('a1').value = entry.a[0] || '';
-            document.getElementById('a2').value = entry.a[1] || '';
-            document.getElementById('a3').value = entry.a[2] || '';
-            document.getElementById('better').value = entry.better || '';
-            photos = entry.photos || [];
-            showPhotos();
-        }
-    } catch(e) {}
-}
-
-function viewPast() {
-    try {
-        const entries = JSON.parse(localStorage.getItem('entries') || '{}');
-        const list = document.getElementById('pastList');
-        list.innerHTML = '';
-        const dates = Object.keys(entries).sort((a,b) => new Date(b) - new Date(a));
-        
-        if (dates.length === 0) {
-            l
+var photos=[];var cfg={name:'',theme:'ocean',size:'medium'};var quotes=["Every day may not be good, but there's something good in every day! 🌈","Believe in yourself and you can do amazing things! ⭐","Be kind, be brave, be YOU! 💖","You are braver than you believe and stronger than you seem! 💪","Dream big and dare to fail! 🚀","In a world where you can be anything, be kind! 🌟","You are capable of amazing things! ✨","Mistakes are proof that you are trying! 🌱","Be silly, be honest, be kind! 😊","You make the world a better place! 🌍"];function init(){loadConfig();updateDate();loadToday();document.getElementById('settingsBtn').onclick=function(){document.getElementById('settingsModal').classList.add('show')};document.getElementById('closeSettingsBtn').onclick=function(){document.getElementById('settingsModal').classList.remove('show')};document.getElementById('nameInput').oninput=function(e){cfg.name=e.target.value;saveConfig();updateWelcome()};document.querySelectorAll('.theme-box').forEach(function(box){box.onclick=function(){document.querySelectorAll('.theme-box').forEach(function(b){b.classList.remove('active')});box.classList.add('active');cfg.theme=box.dataset.theme;saveConfig();applyTheme()}});document.querySelectorAll('.size-btn').forEach(function(btn){btn.onclick=function(){document.querySelectorAll('.size-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');cfg.size=btn.dataset.size;saveConfig();applySize()}});document.getElementById('addPhotoBtn').onclick=function(){document.getElementById('photoInput').click()};document.getElementById('photoInput').onchange=async function(e){for(var file of e.target.files){if(file.type.startsWith('image/')){var compressed=await compress(file);photos.push(compressed)}}showPhotos();e.target.value=''};document.getElementById('saveBtn').onclick=save;document.getElementById('clearBtn').onclick=clear;document.getElementById('viewBtn').onclick=viewPast;document.getElementById('closePastBtn').onclick=function(){document.getElementById('past').style.display='none'}}function loadConfig(){try{var saved=localStorage.getItem('cfg');if(saved)cfg=JSON.parse(saved)}catch(e){}applyTheme();applySize();updateWelcome();document.getElementById('nameInput').value=cfg.name;document.querySelectorAll('.theme-box').forEach(function(b){b.classList.toggle('active',b.dataset.theme===cfg.theme)});document.querySelectorAll('.size-btn').forEach(function(b){b.classList.toggle('active',b.dataset.size===cfg.size)})}function saveConfig(){localStorage.setItem('cfg',JSON.stringify(cfg))}function applyTheme(){document.body.className='theme-'+cfg.theme+' font-'+cfg.size}function applySize(){document.body.className='theme-'+cfg.theme+' font-'+cfg.size}function updateWelcome(){document.getElementById('welcome').textContent=cfg.name?'Welcome back, '+cfg.name+'! 👋':''}function updateDate(){var now=new Date();var opts={weekday:'long',year:'numeric',month:'long',day:'numeric'};document.getElementById('date').textContent=now.toLocaleDateString('en-US',opts);var day=Math.floor((now-new Date(now.getFullYear(),0,0))/86400000);document.getElementById('quote').textContent=quotes[day%quotes.length]}async function compress(file){return new Promise(function(resolve){var reader=new FileReader();reader.onload=function(e){var img=new Image();img.onload=function(){var canvas=document.createElement('canvas');var w=img.width,h=img.height;if(w>800||h>800){if(w>h){h=h*800/w;w=800}else{w=w*800/h;h=800}}canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);resolve(canvas.toDataURL('image/jpeg',0.7))};img.src=e.target.result};reader.readAsDataURL(file)})}function showPhotos(){var grid=document.getElementById('photoGrid');grid.innerHTML='';photos.forEach(function(p,i){var div=document.createElement('div');div.className='photo-item';div.innerHTML='<img src="'+p+'"><button class="photo-remove" onclick="removePhoto('+i+')">×</button>';grid.appendChild(div)})}function removePhoto(i){photos.splice(i,1);showPhotos()}function save(){var today=new Date().toDateString();var entry={date:today,g:[document.getElementById('g1').value,document.getElementById('g2').value,document.getElementById('g3').value],great:document.getElementById('great').value,affirm:document.getElementById('affirm').value,a:[document.getElementById('a1').value,document.getElementById('a2').value,document.getElementById('a3').value],better:document.getElementById('better').value,photos:photos};try{var entries=JSON.parse(localStorage.getItem('entries')||'{}');entries[today]=entry;localStorage.setItem('entries',JSON.stringify(entries));alert('🎉 Great job! Your entry has been saved!')}catch(e){alert('Error saving. Please try again.')}}function clear(){if(confirm('Clear everything?')){document.querySelectorAll('textarea').forEach(function(t){t.value=''});photos=[];showPhotos()}}function loadToday(){var today=new Date().toDateString();try{var entries=JSON.parse(localStorage.getItem('entries')||'{}');var entry=entries[today];if(entry){document.getElementById('g1').value=entry.g[0]||'';document.getElementById('g2').value=entry.g[1]||'';document.getElementById('g3').value=entry.g[2]||'';document.getElementById('great').value=entry.great||'';document.getElementById('affirm').value=entry.affirm||'';document.getElementById('a1').value=entry.a[0]||'';document.getElementById('a2').value=entry.a[1]||'';document.getElementById('a3').value=entry.a[2]||'';document.getElementById('better').value=entry.better||'';photos=entry.photos||[];showPhotos()}}catch(e){}}function viewPast(){try{var entries=JSON.parse(localStorage.getItem('entries')||'{}');var list=document.getElementById('pastList');list.innerHTML='';var dates=Object.keys(entries).sort(function(a,b){return new Date(b)-new Date(a)});if(dates.length===0){list.innerHTML='<p style="text-align:center;color:#888;padding:20px;">No past entries yet!</p>'}else{dates.forEach(function(date){var e=entries[date];var div=document.createElement('div');div.className='entry-item';var photoHTML='';if(e.photos&&e.photos.length>0){photoHTML='<div class="entry-photos">';e.photos.forEach(function(p){photoHTML+='<img src="'+p+'">'});photoHTML+='</div>'}div.innerHTML='<h4>'+date+'</h4><p><strong>Grateful:</strong> '+(e.g.filter(function(x){return x}).join(', ')||'Not recorded')+'</p><p><strong>Amazing:</strong> '+(e.a.filter(function(x){return x}).join(', ')||'Not recorded')+'</p>'+photoHTML;list.appendChild(div)})}document.getElementById('past').style.display='block'}catch(e){}}init();
+</script>
+</body>
+</html>
